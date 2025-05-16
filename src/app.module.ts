@@ -2,7 +2,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Usuario } from './usuarios/entities/usuario.entity';
 import { Estudiante } from './estudiantes/entities/estudiante.entity';
 import { Actividad } from './actividades/entities/actividad.entity';
 import { Resena } from './resenas/entities/resena.entity';
