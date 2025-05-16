@@ -2,9 +2,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
 import { Usuario } from './usuarios/entities/usuario.entity';
-import { UsuariosModule } from './usuarios/usuarios.module';
+import { Estudiante } from './estudiantes/entities/estudiante.entity';
+import { Actividad } from './actividades/entities/actividad.entity';
+import { Resena } from './resenas/entities/resena.entity';
+
+import { EstudiantesModule } from './estudiantes/estudiantes.module';
+import { ActividadesModule } from './actividades/actividades.module';
+import { ResenasModule } from './resenas/resenas.module';
 
 @Module({
   imports: [
@@ -15,11 +20,13 @@ import { UsuariosModule } from './usuarios/usuarios.module';
       username: process.env.DB_USERNAME ?? 'postgres',
       password: process.env.DB_PASSWORD ?? 'postgres',
       database: process.env.DB_NAME ?? 'parcial2',
-      entities: [Usuario],
+      entities: [Estudiante, Actividad, Resena],
       synchronize: true,
       dropSchema: true,
     }),
-    UsuariosModule,
+    EstudiantesModule,
+    ActividadesModule,
+    ResenasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
