@@ -5,7 +5,7 @@ import { Actividad } from '../../actividades/entities/actividad.entity';
 
 @Entity()
 export class Resena {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment', { type: 'bigint' })
     id: number;
     
     @Column()

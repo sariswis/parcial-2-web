@@ -4,7 +4,7 @@ import { Resena } from '../../resenas/entities/resena.entity';
 
 @Entity()
 export class Estudiante {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment', { type: 'bigint' })
     id: number;
     
     @Column()
