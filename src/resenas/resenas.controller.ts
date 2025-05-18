@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Param, UseInterceptors } from '@nestjs/common';
 import { ResenasService } from './resenas.service';
-import { EstudiantesService } from 'src/estudiantes/estudiantes.service';
-import { ActividadesService } from 'src/actividades/actividades.service';
+import { EstudiantesService } from '../estudiantes/estudiantes.service';
+import { ActividadesService } from '../actividades/actividades.service';
 import { CreateResenaDto } from './dto/create-resena.dto';
-import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business.errors.interceptor';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business.errors.interceptor';
 import { plainToInstance } from 'class-transformer';
 import { Resena } from './entities/resena.entity';
 

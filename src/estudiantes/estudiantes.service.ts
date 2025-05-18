@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Estudiante } from './entities/estudiante.entity';
 import { ActividadesService } from '../actividades/actividades.service';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,7 +18,7 @@ export class EstudiantesService {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(estudiante.correo)) {
       throw new BusinessLogicException(
-        'Correo inválido', 
+        'El correo no es válido', 
         BusinessError.PRECONDITION_FAILED
       );
     }

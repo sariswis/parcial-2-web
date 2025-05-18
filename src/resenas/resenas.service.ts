@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Resena } from './entities/resena.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

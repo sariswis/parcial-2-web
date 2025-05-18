@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Put, Param, UseInterceptors } from '@nestj
 import { ActividadesService } from './actividades.service';
 import { CreateActividadDto } from './dto/create-actividad.dto';
 import { EstadoActividadDto } from './dto/estado-actividad.dto';
-import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business.errors.interceptor';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business.errors.interceptor';
 import { plainToInstance } from 'class-transformer';
 import { Actividad } from './entities/actividad.entity';
 
