@@ -38,6 +38,10 @@ export class EstudiantesService {
     const estudiante = await this.estudianteRepository.findOne({
       where: {
         id
+      },
+      relations: {
+        actividades: true,
+        resenas: true,
       }
     })
 
@@ -84,8 +88,8 @@ export class EstudiantesService {
 
     estudiante.actividades = [...estudiante.actividades, actividad];
     actividad.inscritos = [...actividad.inscritos, estudiante];
-    await this.estudianteRepository.save(estudiante);
     await this.actividadesService.updateActividad(actividad.id, actividad);
+    return await this.estudianteRepository.save(estudiante);
   }
 
   async eliminarEstudiante(id: number) {

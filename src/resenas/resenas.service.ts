@@ -47,6 +47,10 @@ export class ResenasService {
     const resena = await this.resenaRepository.findOne({
       where: {
         id
+      },
+      relations: {
+        actividad: true,
+        estudiante: true,
       }
     })
     if (!resena) {

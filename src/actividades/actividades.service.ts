@@ -39,6 +39,10 @@ export class ActividadesService {
     const actividad = await this.actividadRepository.findOne({
       where: {
         id
+      },
+      relations: {
+        inscritos: true,
+        resenas: true,
       }
     })
     if (!actividad) {
