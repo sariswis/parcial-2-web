@@ -43,7 +43,8 @@ export class EstudiantesService {
   async inscribirseActividad(idEstudiante: number, idActividad: number) {
     const estudiante = await this.findEstudianteById(idEstudiante);
     const actividad = await this.actividadesService.findActividadById(idActividad);
-    if (actividad.cuposDisponibles <= 0) {
+    const cuposDisponibles = actividad.cupoMaximo - actividad.inscritos.length;
+    if (cuposDisponibles <= 0) {
       throw new BusinessLogicException(
         `No hay cupos disponibles para la actividad con id ${idActividad}`,
         BusinessError.PRECONDITION_FAILED,
@@ -59,7 +60,6 @@ export class EstudiantesService {
 
     estudiante.actividades = [...estudiante.actividades, actividad];
     actividad.inscritos = [...actividad.inscritos, estudiante];
-    actividad.cuposDisponibles -= 1;
     await this.estudianteRepository.save(estudiante);
     await this.actividadesService.updateActividad(actividad.id, actividad);
   }

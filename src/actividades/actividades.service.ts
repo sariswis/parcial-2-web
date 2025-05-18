@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateActividadeDto } from './dto/create-actividade.dto';
-import { UpdateActividadeDto } from './dto/update-actividade.dto';
+import { CreateActividadDto } from './dto/create-actividad.dto';
+import { UpdateActividadDto } from './dto/update-actividad.dto';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Actividad } from './entities/actividad.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -37,7 +37,6 @@ export class ActividadesService {
     actividadEncontrada.titulo = actividad.titulo;
     actividadEncontrada.fecha = actividad.fecha;
     actividadEncontrada.cupoMaximo = actividad.cupoMaximo;
-    actividadEncontrada.cuposDisponibles = actividad.cuposDisponibles;
     actividadEncontrada.estado = actividad.estado;
     return await this.actividadRepository.save(actividadEncontrada);
   }
@@ -45,15 +44,16 @@ export class ActividadesService {
   async cambiarEstado(id: number, estado: number) {
     const actividad = await this.findActividadById(id);
     actividad.estado = estado;
+    const cuposDisponibles = actividad.cupoMaximo - actividad.inscritos.length;
 
-    if (estado == 1 && actividad.cupoMaximo * 0.8 != actividad.cuposDisponibles) {
+    if (estado == 1 && actividad.cupoMaximo * 0.8 != cuposDisponibles) {
       throw new BusinessLogicException(
         `No se puede cambiar el estado de la actividad con id ${id} a 1 porque el 80% de los cupos no están ocupados`,
         BusinessError.PRECONDITION_FAILED,
       );
     }
 
-    if (estado == 2 && actividad.cupoMaximo != actividad.cuposDisponibles) {
+    if (estado == 2 && actividad.cupoMaximo != cuposDisponibles) {
       throw new BusinessLogicException(
         `No se puede cambiar el estado de la actividad con id ${id} a 2 porque hay cupos disponibles`,
         BusinessError.PRECONDITION_FAILED,

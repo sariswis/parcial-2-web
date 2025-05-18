@@ -17,9 +17,6 @@ export class Actividad {
     cupoMaximo: number;
 
     @Column()
-    cuposDisponibles: number;
-
-    @Column()
     estado: number;
 
     @ManyToMany(() => Estudiante, (estudiante) => estudiante.actividades)
