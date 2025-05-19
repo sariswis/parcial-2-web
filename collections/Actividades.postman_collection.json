@@ -130,7 +130,7 @@
 						"actividades"
 					]
 				},
-				"description": "Se decidió probar la no creación de una actividad con el título de la longitud menor a 15 caracteres."
+				"description": "Se decidió probar la no creación de una actividad con el título de la longitud menor a 15 caracteres, con el fin de validar esta precondición"
 			},
 			"response": [
 				{
@@ -209,7 +209,7 @@
 						"actividades"
 					]
 				},
-				"description": "Se decidió probar la no creación de una actividad con el título con símbolos."
+				"description": "Se decidió probar la no creación de una actividad con el título con símbolos, con el fin de validar esta precondición"
 			},
 			"response": [
 				{
@@ -295,7 +295,7 @@
 						"{{ACTIVIDAD_ID}}"
 					]
 				},
-				"description": "Se decidió probar la no actualización de una actividad a un estado finalizado cuando todavía tiene cupos."
+				"description": "Se decidió probar la no actualización de una actividad a un estado finalizado cuando todavía tiene cupos, con el fin de validar esta precondición"
 			},
 			"response": [
 				{
@@ -445,7 +445,7 @@
 						"{{FECHA_2}}"
 					]
 				},
-				"description": "Se decidió probar la no obtención de actividades cuando no se encuentra la fecha indicada"
+				"description": "Se decidió probar la no obtención de actividades cuando no se encuentra la fecha indicada, con el fin de evidenciar el filtrado correcto"
 			},
 			"response": [
 				{
@@ -498,16 +498,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "id",
-			"value": "1"
-		},
-		{
-			"key": "base_url",
-			"value": "https://postman-rest-api-learner.glitch.me/"
 		}
 	]
 }

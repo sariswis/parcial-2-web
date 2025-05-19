@@ -1,0 +1,629 @@
+{
+	"info": {
+		"_postman_id": "33b87947-0267-492e-b6b4-2978228be41d",
+		"name": "Estudiantes",
+		"description": "Controlador de estudiantes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29104017",
+		"_collection_link": "https://team11-6576.postman.co/workspace/parcial2~50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-33b87947-0267-492e-b6b4-2978228be41d?action=share&source=collection_link&creator=29104017"
+	},
+	"item": [
+		{
+			"name": "Crear estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"ESTUDIANTE_ID\",data.id)",
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"numeroCedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juan@example.com\",\r\n  \"semestre\": 4,\r\n  \"programa\": \"Medicina\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				},
+				"description": "Se decidió probar la creación de estudiantes con código y correo válido"
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juan@example.com\",\r\n  \"semestre\": 4,\r\n  \"programa\": \"Medicina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"numeroCedula\": 1234,\n    \"nombre\": \"Juan\",\n    \"correo\": \"juan@example.com\",\n    \"programa\": \"Medicina\",\n    \"semestre\": 4\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear estudiante con correo inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 412\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"numeroCedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juanexamplecom\",\r\n  \"semestre\": 0,\r\n  \"programa\": \"Medicina\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				},
+				"description": "Se decidió probar la no creación de estudiantes con correo inválido, con el fin de validar esta precondición"
+			},
+			"response": [
+				{
+					"name": "Crear estudiante con correo inválido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"numeroCedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juanexamplecom\",\r\n  \"semestre\": 0,\r\n  \"programa\": \"Medicina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 412,\r\n    \"message\": \"El correo no es válido\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear estudiante con semestre inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 412\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"numeroCedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juan@example.com\",\r\n  \"semestre\": 0,\r\n  \"programa\": \"Medicina\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				},
+				"description": "Se decidió probar la no creación de estudiantes con semestre inválido, con el fin de validar esta precondición"
+			},
+			"response": [
+				{
+					"name": "Crear estudiante con semestre inválido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"numeroCedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juan@example.com\",\r\n  \"semestre\": 0,\r\n  \"programa\": \"Medicina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El semestre debe estar entre 1 y 10\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful GET request and expected estudiante ID\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"    const responseJson = pm.response.json();",
+							"    const expectedId = parseInt(pm.variables.get(\"ESTUDIANTE_ID\"));",
+							"",
+							"    pm.expect(responseJson.id).to.eql(expectedId);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{ESTUDIANTE_ID}}"
+					]
+				},
+				"description": "Se decidió probar la obtención de estudiantes por id"
+			},
+			"response": [
+				{
+					"name": "Obtener estudiante",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes",
+								"{{ESTUDIANTE_ID}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": 1,\r\n    \"numeroCedula\": 1234,\r\n    \"nombre\": \"Juan\",\r\n    \"correo\": \"juan@example.com\",\r\n    \"programa\": \"Medicina\",\r\n    \"semestre\": 4,\r\n    \"actividades\": [],\r\n    \"resenas\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener estudiante inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}}/estudiantes/0",
+					"host": [
+						"{{BASE_URL}}}"
+					],
+					"path": [
+						"estudiantes",
+						"0"
+					]
+				},
+				"description": "Se decidió probar la no obtención de estudiantes inexistentes, con el fin de evidenciar el filtrado correcto"
+			},
+			"response": [
+				{
+					"name": "Obtener estudiante inexistente",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}}/estudiantes/1",
+							"host": [
+								"{{BASE_URL}}}"
+							],
+							"path": [
+								"estudiantes",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El estudiante con el id dado no existe\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear actividad Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"ACTIVIDAD_ID\",data.id)",
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/actividades",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se decidió probar la creación de una actividad con el título de la longitud mayor o igual a 15 caracteres y sin símbolos. Esto se hace para probar la inscripción"
+			},
+			"response": [
+				{
+					"name": "Crear actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/actividades",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"titulo\": \"Actividad 1 Formar quince caracteres\",\n    \"fecha\": \"2025-05-17\",\n    \"cupoMaximo\": 5,\n    \"estado\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "inscribir un estudiante a una actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripciones/{{ACTIVIDAD_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{ESTUDIANTE_ID}}",
+						"inscripciones",
+						"{{ACTIVIDAD_ID}}"
+					]
+				},
+				"description": "Se decidió probar la inscripción de estudiantes válidos a actividades válidas"
+			},
+			"response": [
+				{
+					"name": "inscribir estudiante a actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripciones/{{ACTIVIDAD_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes",
+								"{{ESTUDIANTE_ID}}",
+								"inscripciones",
+								"{{ACTIVIDAD_ID}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": 1,\r\n    \"numeroCedula\": 1234,\r\n    \"nombre\": \"Juan\",\r\n    \"correo\": \"juan@example.com\",\r\n    \"programa\": \"Medicina\",\r\n    \"semestre\": 4,\r\n    \"actividades\": [\r\n        {\r\n            \"id\": 1,\r\n            \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n            \"fecha\": \"2025-05-17\",\r\n            \"cupoMaximo\": 5,\r\n            \"estado\": 0\r\n        }\r\n    ],\r\n    \"resenas\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "inscribir estudiante nuevamente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"No hay cupo\", function () {",
+							"    pm.response.to.have.status(412);",
+							"",
+							"    const responseJson = pm.response.json();",
+							"    const expectedMessage = \"No hay cupos disponibles para la actividad con el id dado\";",
+							"",
+							"    pm.expect(responseJson).to.have.property(\"message\", expectedMessage);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripcion/{{ACTIVIDAD_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{ESTUDIANTE_ID}}",
+						"inscripcion",
+						"{{ACTIVIDAD_ID}}"
+					]
+				},
+				"description": "Se decidió probar la no inscripción de estudiantes válidos a actividades inválidas por cupo, para corroborar que no pueden haber inscripciones luego de agotar los cupos"
+			},
+			"response": [
+				{
+					"name": "inscribir estudiante nuevamente",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripcion/{{ACTIVIDAD_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes",
+								"{{ESTUDIANTE_ID}}",
+								"inscripcion",
+								"{{ACTIVIDAD_ID}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"No hay cupos disponibles para la actividad con el id dado\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
