@@ -103,7 +103,8 @@ export class EstudiantesService {
     estudiante.actividades = [...estudiante.actividades, actividad];
     actividad.inscritos = [...actividad.inscritos, estudiante];
     await this.actividadesService.updateActividad(actividad.id, actividad);
-    return await this.estudianteRepository.save(estudiante);
+    await this.estudianteRepository.save(estudiante);
+    return this.findEstudianteById(estudianteId);
   }
 
   async eliminarEstudiante(id: number) {

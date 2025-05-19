@@ -5,7 +5,7 @@
 		"description": "Controlador de Resenas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29104017",
-		"_collection_link": "https://team11-6576.postman.co/workspace/parcial2~50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-4b93d7c9-9a98-4c80-bd58-f0e1bfc97ad5?action=share&source=collection_link&creator=29104017"
+		"_collection_link": "https://team11-6576.postman.co/workspace/50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-4b93d7c9-9a98-4c80-bd58-f0e1bfc97ad5?action=share&source=collection_link&creator=29104017"
 	},
 	"item": [
 		{
@@ -431,6 +431,7 @@
 					"script": {
 						"exec": [
 							"var data = pm.response.json();",
+							"pm.globals.set(\"RESENA_ID\",data.id)",
 							"",
 							"pm.test(\"Response status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
@@ -492,6 +493,77 @@
 					},
 					"status": "Created",
 					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": 1,\r\n  \"comentario\": \"Comentario\",\r\n  \"calificacion\": 4,\r\n  \"fecha\": \"2025-05-17\",\r\n  \"estudianteId\": 1,\r\n  \"actividadId\": 1\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener reseña",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful GET request and expected reseña ID\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"    const responseJson = pm.response.json();",
+							"    const expectedId = parseInt(pm.variables.get(\"RESENA_ID\"));",
+							"",
+							"    pm.expect(responseJson.id).to.eql(expectedId);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/resenas/{{RESENA_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"resenas",
+						"{{RESENA_ID}}"
+					]
+				},
+				"description": "Se decidió probar la obtención de reseñas por id"
+			},
+			"response": [
+				{
+					"name": "Obtener reseña",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/resenas/{{RESENA_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"resenas",
+								"{{RESENA_ID}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{

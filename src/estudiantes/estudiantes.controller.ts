@@ -21,7 +21,7 @@ export class EstudiantesController {
     return this.estudiantesService.findEstudianteById(+id);
   }
 
-  @Post(':estudianteId/inscripciones/actividadId')
+  @Post(':estudianteId/inscripciones/:actividadId')
   inscribirseActividad(
     @Param('estudianteId') estudianteId: string, @Param('actividadId') actividadId: string,
   ) {

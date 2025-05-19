@@ -5,7 +5,7 @@
 		"description": "Controlador de actividades",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29104017",
-		"_collection_link": "https://team11-6576.postman.co/workspace/parcial2~50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-ada79f89-c577-4b3c-a056-8bab993346e3?action=share&source=collection_link&creator=29104017"
+		"_collection_link": "https://team11-6576.postman.co/workspace/50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-ada79f89-c577-4b3c-a056-8bab993346e3?action=share&source=collection_link&creator=29104017"
 	},
 	"item": [
 		{
@@ -355,8 +355,7 @@
 							"  pm.response.to.have.status(200);",
 							"  ",
 							"  const responseJson = pm.response.json();",
-							"  const expectedDate = pm.globals.get(\"FECHA\");",
-							"  console.log(\"Expected Date:\", expectedDate);",
+							"  const expectedDate = pm.environment.get(\"FECHA\");",
 							"",
 							"  const allMatch = responseJson.every(item => item.fecha === expectedDate);",
 							"  pm.expect(allMatch).to.be.true;",

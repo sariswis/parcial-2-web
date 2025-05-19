@@ -5,7 +5,7 @@
 		"description": "Controlador de estudiantes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29104017",
-		"_collection_link": "https://team11-6576.postman.co/workspace/parcial2~50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-33b87947-0267-492e-b6b4-2978228be41d?action=share&source=collection_link&creator=29104017"
+		"_collection_link": "https://team11-6576.postman.co/workspace/50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-33b87947-0267-492e-b6b4-2978228be41d?action=share&source=collection_link&creator=29104017"
 	},
 	"item": [
 		{
@@ -569,14 +569,14 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripcion/{{ACTIVIDAD_ID}}",
+					"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripciones/{{ACTIVIDAD_ID}}",
 					"host": [
 						"{{BASE_URL}}"
 					],
 					"path": [
 						"estudiantes",
 						"{{ESTUDIANTE_ID}}",
-						"inscripcion",
+						"inscripciones",
 						"{{ACTIVIDAD_ID}}"
 					]
 				},
