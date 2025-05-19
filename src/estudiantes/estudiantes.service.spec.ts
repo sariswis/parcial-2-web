@@ -47,7 +47,7 @@ describe('EstudiantesService', () => {
     actividadesList = [];
     for (let i = 0; i < 3; i++) {
       const actividad: Actividad = await actividadesService.crearActividad({
-        id: 0,
+        id: i,
         titulo: faker.lorem.words({ min: 1, max: 3 }).replace(/\s/g, '').padEnd(15, 'x'),
         fecha: faker.date.future().toISOString(),
         cupoMaximo: 3,
@@ -130,6 +130,10 @@ describe('EstudiantesService', () => {
     expect(result).not.toBeNull();
     expect(result.actividades.length).toEqual(1);
     expect(result.actividades[0].id).toEqual(storedActividad.id);
+
+    const updatedActividad = await actividadesService.findActividadById(storedActividad.id);
+    expect(updatedActividad.inscritos.length).toEqual(1);
+    expect(updatedActividad.inscritos[0].id).toEqual(storedEstudiante.id);
   });
 
   it('inscribirseActividad should throw an error for an invalid estudiante', async () => {

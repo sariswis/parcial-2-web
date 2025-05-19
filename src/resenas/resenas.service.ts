@@ -15,10 +15,6 @@ export class ResenasService {
     private readonly estudiantesService: EstudiantesService,
   ) {}
 
-  async crearResena(resena: Resena): Promise<Resena> {
-    return await this.resenaRepository.save(resena);
-  }
-
   async agregarResena(resena: Resena): Promise<Resena> {
     const actividad = await this.actividadesService.findActividadById(resena.actividad.id);
     const estudiante = await this.estudiantesService.findEstudianteById(resena.estudiante.id);
@@ -33,7 +29,8 @@ export class ResenasService {
 
     // Validar que el estudiante estuvo inscrito en la actividad
     const inscrito = actividad.inscritos?.some((e: any) => e.id === estudiante.id);
-    if (!inscrito) {
+    const inscrito2 = estudiante.actividades?.some((a: any) => a.id === actividad.id);
+    if (!inscrito || !inscrito2) {
       throw new BusinessLogicException(
         `El estudiante con el id dado no estuvo inscrito en la actividad con el id dado`,
         BusinessError.BAD_REQUEST,

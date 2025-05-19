@@ -55,6 +55,20 @@ export class EstudiantesService {
     return estudiante;
   }
 
+  async updateEstudiante(id: number, estudiante: Estudiante): Promise<Estudiante> {
+    const estudianteEncontrado = await this.findEstudianteById(id);
+
+    if(!estudianteEncontrado) {
+      throw new BusinessLogicException(
+        `El estudiante con el id dado no existe`,
+        BusinessError.NOT_FOUND,
+      );
+    }
+
+    return await this.estudianteRepository.save({...estudianteEncontrado, ...estudiante});
+  }
+
+
   async inscribirseActividad(estudianteId: number, actividadId: number) {
     const estudiante = await this.findEstudianteById(estudianteId);
     const actividad = await this.actividadesService.findActividadById(actividadId);

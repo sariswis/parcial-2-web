@@ -72,14 +72,14 @@ export class ActividadesService {
       );
     }
 
-    return await this.actividadRepository.save({...actividadEncontrada, actividad});
+    return await this.actividadRepository.save({...actividadEncontrada, ...actividad});
   }
 
   async cambiarEstado(actividadId: number, estado: number) {
     const actividad = await this.findActividadById(actividadId);
 
     // Validar que el estado sea 0, 1 o 2
-    if (estado <= 0 || estado >= 2) {
+    if (estado < 0 || estado > 2) {
       throw new BusinessLogicException(
         `El estado debe ser 0, 1 o 2`,
         BusinessError.PRECONDITION_FAILED,
@@ -97,7 +97,7 @@ export class ActividadesService {
     // Validar que se puede finalizar la actividad (estado 2)
     if (estado == 2 && actividad.cupoMaximo > actividad.inscritos.length) {
       throw new BusinessLogicException(
-        `No se puede cambiar el estado  a 2 de la actividad con el id dado porque todavía hay cupos disponibles`,
+        `No se puede cambiar el estado a 2 de la actividad con el id dado porque todavía hay cupos disponibles`,
         BusinessError.PRECONDITION_FAILED,
       );
     }
