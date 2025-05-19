@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "4b93d7c9-9a98-4c80-bd58-f0e1bfc97ad5",
+		"name": "Resenas",
+		"description": "Controlador de Resenas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29104017",
+		"_collection_link": "https://team11-6576.postman.co/workspace/parcial2~50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-4b93d7c9-9a98-4c80-bd58-f0e1bfc97ad5?action=share&source=collection_link&creator=29104017"
+	},
+	"item": [
+		{
+			"name": "Crear estudiante Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"ESTUDIANTE_ID\",data.id)",
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"numeroCedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juan@example.com\",\r\n  \"semestre\": 4,\r\n  \"programa\": \"Medicina\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				},
+				"description": "Se decidió probar la creación de estudiantes con código y correo válido. Se hace para hacer reseñas"
+			},
+			"response": [
+				{
+					"name": "Crear estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 1234,\r\n  \"nombre\": \"Juan\",\r\n  \"correo\": \"juan@example.com\",\r\n  \"semestre\": 4,\r\n  \"programa\": \"Medicina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"numeroCedula\": 1234,\n    \"nombre\": \"Juan\",\n    \"correo\": \"juan@example.com\",\n    \"programa\": \"Medicina\",\n    \"semestre\": 4\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear actividad Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"ACTIVIDAD_ID\",data.id)",
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/actividades",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se decidió probar la creación de una actividad con el título de la longitud mayor o igual a 15 caracteres y sin símbolos. . Se hace para hacer reseñas"
+			},
+			"response": [
+				{
+					"name": "Crear actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/actividades",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"titulo\": \"Actividad 1 Formar quince caracteres\",\n    \"fecha\": \"2025-05-17\",\n    \"cupoMaximo\": 5,\n    \"estado\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Inscribir un estudiante a una actividad Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripciones/{{ACTIVIDAD_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{ESTUDIANTE_ID}}",
+						"inscripciones",
+						"{{ACTIVIDAD_ID}}"
+					]
+				},
+				"description": "Se decidió probar la inscripción de estudiantes válidos a actividades válidas, para hacer la reseña"
+			},
+			"response": [
+				{
+					"name": "Inscribir estudiante a actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/estudiantes/{{ESTUDIANTE_ID}}/inscripciones/{{ACTIVIDAD_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"estudiantes",
+								"{{ESTUDIANTE_ID}}",
+								"inscripciones",
+								"{{ACTIVIDAD_ID}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": 1,\r\n    \"numeroCedula\": 1234,\r\n    \"nombre\": \"Juan\",\r\n    \"correo\": \"juan@example.com\",\r\n    \"programa\": \"Medicina\",\r\n    \"semestre\": 4,\r\n    \"actividades\": [\r\n        {\r\n            \"id\": 1,\r\n            \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n            \"fecha\": \"2025-05-17\",\r\n            \"cupoMaximo\": 5,\r\n            \"estado\": 0\r\n        }\r\n    ],\r\n    \"resenas\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear reseña con actividad no finalizada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"",
+							"pm.test(\"Response status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"    ",
+							"    const responseJson = pm.response.json();",
+							"    const expectedMessage = \"La actividad con el id dado no tiene estado 2\";",
+							"",
+							"    pm.expect(responseJson).to.have.property(\"message\", expectedMessage);",
+							"});",
+							"",
+							"",
+							" ",
+							"",
+							"",
+							"",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comentario\": \"Comentario\",\r\n  \"calificacion\": 4,\r\n  \"fecha\": \"2025-05-17\",\r\n  \"estudianteId\": {{ESTUDIANTE_ID}},\r\n  \"actividadId\": {{ACTIVIDAD_ID}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/resenas",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"resenas"
+					]
+				},
+				"description": "Se decidió para probar el manejo de errores cuando no se cumple la precondición del estado de la actividad"
+			},
+			"response": [
+				{
+					"name": "Crear reseña con actividad no finalizada",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comentario\": \"Comentario\",\r\n  \"calificacion\": 4,\r\n  \"fecha\": \"2025-05-17\",\r\n  \"estudianteId\": {{ESTUDIANTE_ID}},\r\n  \"actividadId\": {{ACTIVIDAD_ID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/resenas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"resenas"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 400,\r\n    \"message\": \"La actividad con el id dado no tiene estado 2\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Finalizar actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/actividades/{{ACTIVIDAD_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades",
+						"{{ACTIVIDAD_ID}}"
+					]
+				},
+				"description": "Se decidió probar la actualización de una actividad a un estado finalizado, para hacer la reseña"
+			},
+			"response": [
+				{
+					"name": "Finalizar actividad",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"estado\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/actividades/{{ACTIVIDAD_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades",
+								"{{ACTIVIDAD_ID}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"titulo\": \"Actividad 1 Formar quince caracteres\",\n    \"fecha\": \"2025-05-17\",\n    \"cupoMaximo\": 5,\n    \"estado\": 2,\n    \"inscritos\": [\n        {\n            \"id\": 1,\n            \"numeroCedula\": 1234,\n            \"nombre\": \"Juan\",\n            \"correo\": \"juan@example.com\",\n            \"programa\": \"Medicina\",\n            \"semestre\": 4\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear reseña",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comentario\": \"Comentario\",\r\n  \"calificacion\": 4,\r\n  \"fecha\": \"2025-05-17\",\r\n  \"estudianteId\": {{ESTUDIANTE_ID}},\r\n  \"actividadId\": {{ACTIVIDAD_ID}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/resenas",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"resenas"
+					]
+				},
+				"description": "Se decidió probar la creación de reservas cuando todas las precondiciones se cumplen, para evidenciar su buen funcionamiento"
+			},
+			"response": [
+				{
+					"name": "Crear reseña",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comentario\": \"Comentario\",\r\n  \"calificacion\": 4,\r\n  \"fecha\": \"2025-05-17\",\r\n  \"estudianteId\": {{ESTUDIANTE_ID}},\r\n  \"actividadId\": {{ACTIVIDAD_ID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/resenas",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"resenas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": 1,\r\n  \"comentario\": \"Comentario\",\r\n  \"calificacion\": 4,\r\n  \"fecha\": \"2025-05-17\",\r\n  \"estudianteId\": 1,\r\n  \"actividadId\": 1\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

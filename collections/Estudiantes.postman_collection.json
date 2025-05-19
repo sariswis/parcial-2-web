@@ -76,6 +76,8 @@
 							]
 						}
 					},
+					"status": "Created",
+					"code": 201,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -155,6 +157,8 @@
 							]
 						}
 					},
+					"status": "Precondition Failed",
+					"code": 412,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -234,6 +238,8 @@
 							]
 						}
 					},
+					"status": "Precondition Failed",
+					"code": 412,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -303,6 +309,8 @@
 							]
 						}
 					},
+					"status": "OK",
+					"code": 200,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -366,6 +374,8 @@
 							]
 						}
 					},
+					"status": "Not Found",
+					"code": 404,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -466,7 +476,7 @@
 			]
 		},
 		{
-			"name": "inscribir un estudiante a una actividad",
+			"name": "Inscribir un estudiante a una actividad",
 			"event": [
 				{
 					"listen": "test",
@@ -500,7 +510,7 @@
 			},
 			"response": [
 				{
-					"name": "inscribir estudiante a actividad",
+					"name": "Inscribir estudiante a actividad",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -517,12 +527,13 @@
 							]
 						}
 					},
+					"status": "Created",
+					"code": 201,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
 							"key": "Content-Type",
 							"value": "application/json",
-							"name": "Content-Type",
 							"description": "",
 							"type": "text"
 						}
@@ -533,7 +544,7 @@
 			]
 		},
 		{
-			"name": "inscribir estudiante nuevamente",
+			"name": "Inscribir estudiante nuevamente",
 			"event": [
 				{
 					"listen": "test",
@@ -573,7 +584,7 @@
 			},
 			"response": [
 				{
-					"name": "inscribir estudiante nuevamente",
+					"name": "Inscribir estudiante nuevamente",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -590,12 +601,13 @@
 							]
 						}
 					},
+					"status": "Precondition Failed",
+					"code": 412,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
 							"key": "Content-Type",
 							"value": "application/json",
-							"name": "Content-Type",
 							"description": "",
 							"type": "text"
 						}
