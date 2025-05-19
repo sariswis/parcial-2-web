@@ -10,7 +10,7 @@ export class Actividad {
     @Column()
     titulo: string;
 
-    @Column()
+    @Column({ type: 'date'})
     fecha: string;
 
     @Column()

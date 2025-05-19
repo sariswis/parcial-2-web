@@ -1,0 +1,513 @@
+{
+	"info": {
+		"_postman_id": "ada79f89-c577-4b3c-a056-8bab993346e3",
+		"name": "Actividades",
+		"description": "Controlador de actividades",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29104017",
+		"_collection_link": "https://team11-6576.postman.co/workspace/parcial2~50e4b4ab-aa7c-44cb-9b40-9d88897d81e3/collection/29104017-ada79f89-c577-4b3c-a056-8bab993346e3?action=share&source=collection_link&creator=29104017"
+	},
+	"item": [
+		{
+			"name": "Crear actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"ACTIVIDAD_ID\",data.id)",
+							"",
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/actividades",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se decidió probar la creación de una actividad con el título de la longitud mayor o igual a 15 caracteres y sin símbolos."
+			},
+			"response": [
+				{
+					"name": "Crear actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Actividad 1 Formar quince caracteres\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/actividades",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"titulo\": \"Actividad 1 Formar quince caracteres\",\n    \"fecha\": \"2025-05-17\",\n    \"cupoMaximo\": 5,\n    \"estado\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear actividad con título corto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 412\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Actividad 2\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/actividades",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se decidió probar la no creación de una actividad con el título de la longitud menor a 15 caracteres."
+			},
+			"response": [
+				{
+					"name": "Crear actividad con título corto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Actividad 2\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/actividades",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 412,\r\n    \"message\": \"El título debe tener al menos 15 caracteres\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear actividad con título con símbolos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 412\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"&imbolossssssssssssssssss:\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/actividades",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se decidió probar la no creación de una actividad con el título con símbolos."
+			},
+			"response": [
+				{
+					"name": "Crear actividad con título con símbolos",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"&imbolossssssssssssssssss:\",\r\n  \"fecha\": \"2025-05-17\",\r\n  \"cupoMaximo\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/actividades",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 412,\r\n    \"message\": \"El título no puede tener símbolos\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Finalizar actividad sin inscritos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 412 and message is the expected one\", function () {",
+							"    pm.response.to.have.status(412);",
+							"",
+							"    const responseJson = pm.response.json();",
+							"    const expectedMessage = \"No se puede cambiar el estado a 2 de la actividad con el id dado porque todavía hay cupos disponibles\";",
+							"",
+							"    pm.expect(responseJson).to.have.property(\"message\", expectedMessage);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"estado\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/actividades/{{ACTIVIDAD_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades",
+						"{{ACTIVIDAD_ID}}"
+					]
+				},
+				"description": "Se decidió probar la no actualización de una actividad a un estado finalizado cuando todavía tiene cupos."
+			},
+			"response": [
+				{
+					"name": "Finalizar actividad sin inscritos",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"estado\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/actividades/{{ACTIVIDAD_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades",
+								"{{ACTIVIDAD_ID}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"No se puede cambiar el estado a 2 de la actividad con el id dado porque todavía hay cupos disponibles\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener actividades por fecha",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response successful by date\", function () {",
+							"  pm.response.to.have.status(200);",
+							"  ",
+							"  const responseJson = pm.response.json();",
+							"  const expectedDate = pm.globals.get(\"FECHA\");",
+							"  console.log(\"Expected Date:\", expectedDate);",
+							"",
+							"  const allMatch = responseJson.every(item => item.fecha === expectedDate);",
+							"  pm.expect(allMatch).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/actividades/{{FECHA}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades",
+						"{{FECHA}}"
+					]
+				},
+				"description": "Se decidió probar la obtención de actividades con la fecha indicada"
+			},
+			"response": [
+				{
+					"name": "Obtener actividades por fecha",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/actividades/{{FECHA}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades",
+								"{{FECHA}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"titulo\": \"Actividad 1 Formar quince caracteres\",\n        \"fecha\": \"2025-05-17\",\n        \"cupoMaximo\": 5,\n        \"estado\": 0\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener actividades por fecha inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response successful by date\", function () {",
+							"  pm.response.to.have.status(200);",
+							"  ",
+							"  const responseJson = pm.response.json();",
+							"  const expectedDate = pm.globals.get(\"FECHA\");",
+							"",
+							"  const allMatch = responseJson.every(item => item.fecha === expectedDate);",
+							"  pm.expect(allMatch).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/actividades/{{FECHA_2}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"actividades",
+						"{{FECHA_2}}"
+					]
+				},
+				"description": "Se decidió probar la no obtención de actividades cuando no se encuentra la fecha indicada"
+			},
+			"response": [
+				{
+					"name": "Obtener actividades por fecha inexistente",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/actividades/{{FECHA_2}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"actividades",
+								"{{FECHA_2}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}

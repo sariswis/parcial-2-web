@@ -14,7 +14,7 @@ export class Resena {
     @Column()
     calificacion: number;
 
-    @Column()
+    @Column({ type: 'date'})
     fecha: string;
 
     @ManyToOne(() => Estudiante, (estudiante) => estudiante.resenas)
